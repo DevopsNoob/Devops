@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "Maven_Test"
+        jdk "MyJava"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                git 'https://github.com/DevopsNoob/Devops.git'
+                sh "mvn compile"
+            }
+        }
+        stage('code review') {
+            steps {
+                sh "mvn pmd:pmd"
+            }
+        }
+        stage('test') {
+            steps {
+                //git 'https://github.com/DevopsNoob/Devops.git'
+                sh "mvn testing"
+            }
+            post{
+                success{
+                        junit 'target/surefire-reports/*.xml'
+                } 
+                failure {
+                        echo 'It is failed'
+                }
+               
+            }
+        }
+        stage('package') {
+            agent {label 'linux_slave'}
+            steps {
+                git 'https://github.com/DevopsNoob/Devops.git'
+                sh "mvn package"
+            }
+        }
+    }
+}
+ 
+        
