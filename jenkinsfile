@@ -36,7 +36,7 @@ pipeline {
             }
         }
         stage('package') {
-            agent {label 'linux_slave'}
+            agent {label 'linux_slave_new'}
             steps {
                 git 'https://github.com/DevopsNoob/Devops.git'
                 sh "mvn package"
