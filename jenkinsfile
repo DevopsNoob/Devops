@@ -22,7 +22,8 @@ pipeline {
         stage('test') {
             steps {
                 //git 'https://github.com/DevopsNoob/Devops.git'
-                sh "mvn testing"
+                sh "mvn test"
+                //sh "mvn testing"
             }
             post{
                 success{
