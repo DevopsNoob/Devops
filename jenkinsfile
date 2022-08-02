@@ -23,7 +23,7 @@ pipeline {
             steps {
                 //git 'https://github.com/DevopsNoob/Devops.git'
                 sh "mvn test"
-                //sh "mvn testing"
+                
             }
             post{
                 success{
