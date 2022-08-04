@@ -20,6 +20,7 @@ pipeline {
             }
         }
         stage('test') {
+            agent {label "windows_slave"}
             steps {
                 //git 'https://github.com/DevopsNoob/Devops.git'
                 sh "mvn test"
